@@ -37,6 +37,7 @@ pipeline {
                 withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
                     script {
                         echo "AWS Env Is: ${env.AWS_DEFAULT_REGION}"
+                        sh"chmod +x function.sh"
                         sh".. function.sh 'eks-test' 'eks-changeset' 'eks.yaml' 'eks-params.json'"
                         sh".. function.sh 'eks-nodes-test' 'eks-nodes-changeset' 'nodes.yaml' 'nodes-params.json'"
                     }
