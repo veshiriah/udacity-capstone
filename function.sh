@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 function create_update_stack() {
   STACK_NAME=$1
