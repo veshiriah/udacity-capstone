@@ -20,11 +20,20 @@ pipeline {
                 script {
                     echo "Building project"
                     loadEnvironmentVariables('environment/env.properties')
-                    echo "Environment Variables:"
-                    echo sh(script: 'env|sort', returnStdout: true)
                 }
             }
         }
+
+        stage('Print env variables') {
+            steps {
+                script {
+                    echo "Environment Variables:"
+                    echo sh(script: 'env|sort', returnStdout: true)
+                    echo "Variable ${env.AWS_DEFAULT_REGION}"
+                }
+            }
+        }
+
 
         stage('Linting') {
             steps {
@@ -48,7 +57,7 @@ pipeline {
 
         stage('Create kube config file') {
             steps {
-                withAWS(region:'${env.AWS_DEFAULT_REGION}', credentials:'awsCreds') {
+                withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
                 sh '''
                     aws eks --region ${env.AWS_DEFAULT_REGION} update-kubeconfig --name UdacityDev-EKS-Cluster
                     kubectl get svc
@@ -61,7 +70,7 @@ pipeline {
 
         stage('Deployment') {
             steps {
-                withAWS(region:'${env.AWS_DEFAULT_REGION}', credentials:'awsCreds') {
+                withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
                 sh '''
                     kubectl apply -f deployment/deployment.yaml
                     kubectl get service/udacity-capstone-kc
