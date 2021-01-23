@@ -31,10 +31,11 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Linting') {
             steps {
                 sh 'tidy -q -e index.html'
+                echo "Linting finished"
             }
         }
 
