@@ -27,9 +27,7 @@ pipeline {
         stage('Print env variables') {
             steps {
                 script {
-                    echo "Environment Variables:"
-                    echo sh(script: 'env|sort', returnStdout: true)
-                    echo "Variable ${env.AWS_DEFAULT_REGION}"
+                    echo "AWS Env Is: ${env.AWS_DEFAULT_REGION}"
                 }
             }
         }
