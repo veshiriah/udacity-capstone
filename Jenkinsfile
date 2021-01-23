@@ -56,7 +56,8 @@ pipeline {
         stage('Create kube config file') {
             steps {
                 withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
-                sh"aws eks --region ${env.AWS_DEFAULT_REGION} update-kubeconfig --name UdacityDev-EKS-Cluster"
+                sh"aws eks update-kubeconfig --name UdacityDev-EKS-Cluster --region ${env.AWS_DEFAULT_REGION}"
+                sh"kubectl edit -n kube-system deployment/aws-auth-cm.yaml"
                 sh"kubectl get svc"
                 sh"kubectl config use/context arn:aws:eks:ap-southeast-2:${env.AWS_ACCOUNT_ID}:cluster/UdacityDev-EKS-Cluster"
                 sh"kubectl set image deployment/udacity-capstone-kc udacity-capstone-kc=kchachowska/udacity-capstone-kc"

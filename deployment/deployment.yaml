@@ -35,7 +35,7 @@ spec:
         app: udacity-capstone-kc
     spec:
       containers:
-      - name: udacity-capstone-kc
+      - name: nginx
         image: kchachowska/udacity-capstone-kc
         ports:
         - containerPort: 80
