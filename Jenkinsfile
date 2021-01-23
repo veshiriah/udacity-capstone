@@ -33,8 +33,8 @@ pipeline {
         }
 
         stage('Deploy cloud formation') {
-            withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
-                steps {
+            steps {
+                withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
                     script {
                         echo "AWS Env Is: ${env.AWS_DEFAULT_REGION}"
                         sh"aws cloudformation create-stack --stack-name kinga-eks-test --template-body file://aws/eks.yaml  --parameters file://aws/eks-params.json  --region=${env.AWS_DEFAULT_REGION} --capabilities CAPABILITY_IAM"
