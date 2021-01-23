@@ -1,0 +1,26 @@
+[
+    {
+      "ParameterKey": "EnvironmentName",
+      "ParameterValue": "UdacityDev"
+    },
+    {
+      "ParameterKey": "ImageID",
+      "ParameterValue": "ami-0987943c813a8426b"
+    },
+    {
+      "ParameterKey": "KeyPairName",
+      "ParameterValue": "jenkins"
+    },
+    {
+      "ParameterKey": "MinSize",
+      "ParameterValue": "1"
+    },
+    {
+      "ParameterKey": "MaxSize",
+      "ParameterValue": "3"
+    },
+    {
+      "ParameterKey": "DesiredSize",
+      "ParameterValue": "2"
+    }
+  ]
