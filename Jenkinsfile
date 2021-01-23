@@ -31,23 +31,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy cloud formation') {
-            steps {
-                withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
-                    script {
-                        echo "AWS Env Is: ${env.AWS_DEFAULT_REGION}"
-                        sh """chmod +x function.sh
-                        . ./function.sh
-                        create_update_stack 'eks-test' 'eks-changeset' 'eks.yaml' 'eks-params.json'
-                        . ./function.sh
-                        create_update_stack 'eks-nodes-test' 'eks-nodes-changeset' 'nodes.yaml' 'nodes-params.json'
-                        """
-                    }
-                }
-            }
-        }  
-
+        
         stage('Linting') {
             steps {
                 sh 'tidy -q -e index.html'
