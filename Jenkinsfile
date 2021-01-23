@@ -16,8 +16,6 @@ pipeline {
                 script {
                     echo "Building project"
                     loadEnvironmentVariables('environment/env.properties')
-                    echo "Params:"
-                    echo "action: ${action}"
                     echo "Environment Variables:"
                     echo sh(script: 'env|sort', returnStdout: true)
                 }
