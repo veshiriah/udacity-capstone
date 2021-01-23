@@ -32,6 +32,17 @@ pipeline {
             }
         }
 
+        stage('Deploy cloud formation') {
+            withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
+                steps {
+                    script {
+                        echo "AWS Env Is: ${env.AWS_DEFAULT_REGION}"
+                        sh"aws cloudformation create-stack --stack-name kinga-eks-test --template-body file://aws/eks.yaml  --parameters file://aws/eks-params.json  --region=${env.AWS_DEFAULT_REGION} --capabilities CAPABILITY_IAM"
+                        sh"aws cloudformation create-stack --stack-name kinga-nodes-test --template-body file://nodes.yaml  --parameters file://nodes-params.json  --region=${env.AWS_DEFAULT_REGION} --capabilities CAPABILITY_IAM"
+                    }
+                }
+            }
+        }  
 
         stage('Linting') {
             steps {
