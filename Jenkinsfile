@@ -70,6 +70,7 @@ pipeline {
             steps {
                 withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
                 sh '''
+                    kubectl apply -f deployment/aws-auth-cm.yaml
                     kubectl apply -f deployment/deployment.yaml
                     kubectl get nodes
                     kubectl get deployment

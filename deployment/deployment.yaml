@@ -12,6 +12,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 31910
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,7 +36,7 @@ spec:
         app: udacity-capstone-kc
     spec:
       containers:
-      - name: nginx
+      - name: udacity-capstone-kc
         image: kchachowska/udacity-capstone-kc
         ports:
         - containerPort: 80
