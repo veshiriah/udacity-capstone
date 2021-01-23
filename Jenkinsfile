@@ -8,8 +8,12 @@ def loadEnvironmentVariables(path){
     }
 } 
 
+
 pipeline {
     agent any
+    environment {
+        PATH = "/home/jenkins/.local/bin:/opt/node/bin:$PATH"
+    }
     stages {
         stage('Get env variables') {
             steps {
@@ -19,7 +23,6 @@ pipeline {
                     echo "Environment Variables:"
                     echo sh(script: 'env|sort', returnStdout: true)
                 }
-            
             }
         }
 
