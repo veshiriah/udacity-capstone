@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: udacity-capstone-kc
+  labels:
+    app: udacity-capstone-kc
+spec:
+  type: LoadBalancer
+  selector:
+    app: udacity-capstone-kc
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udacity-capstone-kc
+  labels:
+    app: udacity-capstone-kc
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: udacity-capstone-kc
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: udacity-capstone-kc
+    spec:
+      containers:
+      - name: udacity-capstone-kc
+        image: kchachowska/udacity-capstone-kc
+        ports:
+        - containerPort: 80
