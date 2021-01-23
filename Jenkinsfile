@@ -45,7 +45,7 @@ pipeline {
 
         stage('Create kube config file') {
             steps {
-                withAWS(region:'${AWS_DEFAULT_REGION}', credentials:'awsCreds') {
+                withAWS(region:'$AWS_DEFAULT_REGION', credentials:'awsCreds') {
                 sh '''
                     aws eks --region ${AWS_DEFAULT_REGION} update-kubeconfig --name UdacityDev-EKS-Cluster
                     kubectl get svc
@@ -58,7 +58,7 @@ pipeline {
 
         stage('Deployment') {
             steps {
-                withAWS(region:'${AWS_DEFAULT_REGION}', credentials:'awsCreds') {
+                withAWS(region:'$AWS_DEFAULT_REGION', credentials:'awsCreds') {
                 sh '''
                     kubectl apply -f deployment/deployment.yaml
                     kubectl get service/udacity-capstone-kc
