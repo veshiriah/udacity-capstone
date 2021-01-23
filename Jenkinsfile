@@ -61,7 +61,7 @@ pipeline {
                 sh"kubectl get svc"
                 sh"kubectl config set-context arn:aws:eks:${env.AWS_DEFAULT_REGION}${env.AWS_ACCOUNT_ID}::cluster/UdacityDev-EKS-Cluster"
                 sh"kubectl config use-context arn:aws:eks:${env.AWS_DEFAULT_REGION}:${env.AWS_ACCOUNT_ID}:cluster/UdacityDev-EKS-Cluster"
-                sh"kubectl set image deployment/udacity-capstone-kc udacity-capstone-kc=kchachowska/udacity-capstone-kc"
+                // sh"kubectl set image deployment/udacity-capstone-kc udacity-capstone-kc=kchachowska/udacity-capstone-kc"
                 }
             }
         }
@@ -71,6 +71,9 @@ pipeline {
                 withAWS(region:"${env.AWS_DEFAULT_REGION}", credentials:'awsCreds') {
                 sh '''
                     kubectl apply -f deployment/deployment.yaml
+                    kubectl get nodes
+                    kubectl get deployment
+                    kubectl get pod -o wide
                     kubectl get service/udacity-capstone-kc
                 '''
                 }
