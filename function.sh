@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 function create_update_stack() {
     STACK_NAME=$1
