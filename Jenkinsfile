@@ -75,6 +75,7 @@ pipeline {
                     kubectl get nodes
                     kubectl get deployment
                     kubectl get pod -o wide
+                    kubectl describe pods
                     kubectl get service/udacity-capstone-kc
                 '''
                 }
