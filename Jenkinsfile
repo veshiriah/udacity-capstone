@@ -62,7 +62,7 @@ pipeline {
                 sh"kubectl config set-context arn:aws:eks:${env.AWS_DEFAULT_REGION}${env.AWS_ACCOUNT_ID}::cluster/UdacityDev-EKS-Cluster"
                 sh"kubectl config use-context arn:aws:eks:${env.AWS_DEFAULT_REGION}:${env.AWS_ACCOUNT_ID}:cluster/UdacityDev-EKS-Cluster"
                 //  In case the image needed updatingx
-                // sh"kubectl set image deployment/udacity-capstone-kc udacity-capstone-kc=kchachowska/udacity-capstone-kc"
+                sh"kubectl set image deployment/udacity-capstone-kc udacity-capstone-kc=kchachowska/udacity-capstone-kc"
                 }
             }
         }
