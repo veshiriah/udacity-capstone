@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo "AWS Env Is: ${env.AWS_DEFAULT_REGION}"
-                    cat index.html
+                    sh"cat index.html"
                 }
             }
         }
