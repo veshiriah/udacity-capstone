@@ -38,5 +38,6 @@ spec:
       containers:
       - name: udacity-capstone-kc
         image: kchachowska/udacity-capstone-kc
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
