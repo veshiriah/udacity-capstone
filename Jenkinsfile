@@ -86,7 +86,7 @@ pipeline {
         stage('Prune') {
             steps {
                 sh """
-                    docker system prune
+                    docker system prune --force
                 """
             }
         }
